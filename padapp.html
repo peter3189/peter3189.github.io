@@ -1,8 +1,27 @@
 <html>
-  <head>
-    <title>PadApp</title>    
-  </head>
-  <body>
-    <h1>Hello PadApp!!</h1>
-  </body>
+<head>
+  <title>PadApp</title>  
+</head>
+
+<body>
+  <div id="app">
+    {{message}}
+    <p>      
+      <div v-for="(value, key) in pads">        
+        <button @click="playPad(key)">{{key}}</button>
+      </div>
+    </p>
+    <button @click="stopPad()">Stop Pad</button>
+
+    <button @click="loadFile()">Load</button>
+    <input type="file" id="fileInput" />
+  </div>
+
+  
+  
+  
+</body>
+  <script src="http://unpkg.com/tone"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="javascripts/padPlayer.js"></script>
 </html>
