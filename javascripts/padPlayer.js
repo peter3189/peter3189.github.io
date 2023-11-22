@@ -5,8 +5,12 @@ var player = null;
 
 createApp({
     setup() {
-        const message = ref('Hello Pads!');
-        var pads = reactive({});
+        const message = ref('PadApp');
+        var pads = reactive({
+            'C': 'media/ReawakenFoundationsC.mp3',
+            'G': 'media/ReawakenFoundationsG.mp3',
+            'Bb': 'media/ReawakenFoundationsBb.mp3'
+        });
         /*const pads = {                        
             'C': 'media/ReawakenFoundationsC.mp3',
             'G': 'media/ReawakenFoundationsG.mp3',
