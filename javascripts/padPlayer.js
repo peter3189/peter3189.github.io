@@ -5,7 +5,9 @@ var player = null;
 
 createApp({
     setup() {
-        const message = ref('PadApp');
+        var message = ref('PadApp');
+        var loading = ref(false);
+
         var pads = reactive({
             'C': 'media/ReawakenFoundationsC.mp3',
             'G': 'media/ReawakenFoundationsG.mp3',
@@ -26,21 +28,33 @@ createApp({
             } else {
                 startAudio();
             }
-            player = new Tone.Player({
-                url: pads[key],
-                autostart: true,
+            
+            loading.value = true;
+            message.value = `Loading ${key}...`;
+
+            player = new Tone.Player({                
+                //autostart: true,
                 loop: true,
                 loopStart: 10,
                 loopEnd: 930,           
                 fadeIn: 2,
                 fadeOut: 5
             }).toDestination();
-            console.info('Playing ', key);            
+            
+            player.load(pads[key]).then(() => {         
+                loading.value = false;  
+                message.value = `PadApp playing ${key}`;            
+                player.start();         
+            }).catch((error) => {                
+                console.log(error);
+                loading.value = false;
+                message.value = `Error on loading ${key}: ${error}`;
+            });       
         };
 
         const stopPad = () => {
             if (!player) {
-                console.warn('Player is not initialized');
+                console.warn('Player is not initialized');                
             }
             console.info('Stopping pad player');
             player.stop();
