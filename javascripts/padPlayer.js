@@ -5,7 +5,7 @@ var player = null;
 
 createApp({
     setup() {
-        var message = ref('PadApp');
+        var message = ref('Pad App');
         var loading = ref(false);
 
         var pads = reactive({
